@@ -1,0 +1,86 @@
+.login-header {
+  background-color: #2a8dd8;
+  color: white;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1),
+              0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  position: sticky;
+  top: 0;
+  z-index: 1100;
+}
+
+.login-header-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.login-header-subtitle {
+  font-size: 0.875rem;
+  opacity: 0.9;
+}
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 80px);
+  padding: 0 16px;
+}
+
+.login-paper {
+  border-radius: 16px;
+  max-width: 400px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.login-form-header {
+  background-color: #2a8dd8;
+  color: white;
+  padding: 40px 32px;
+  text-align: center;
+}
+
+.login-form-subtitle {
+  font-size: 0.95rem;
+  opacity: 0.9;
+}
+
+.login-form {
+  padding: 36px;
+}
+
+.login-form-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 8px;
+  margin-bottom: 24px;
+}
+
+.login-link-button {
+  color: #2a8dd8;
+  text-transform: none;
+  font-size: 0.875rem;
+}
+
+.login-submit-button:hover {
+  background-color: #2377b8;
+}
+
+.login-contact-text {
+  color: #6b7280;
+  text-align: center;
+  font-size: 0.875rem;
+  margin-top: 32px;
+}
+
+@media (max-width: 600px) {
+  .login-header > :last-child {
+    display: none;
+  }
+}

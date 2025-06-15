@@ -1,0 +1,98 @@
+.doctor-profile-container {
+  max-width: 600px;
+  margin: 1rem;
+  padding: 1rem;
+  background-color: #ffffff;
+  border-radius: 12px;
+}
+
+.doctor-profile-title {
+  color: #1976d2;
+}
+
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  color: #424242;
+}
+
+.profile-info strong {
+  color: #1565c0;
+  font-size: 1.2rem;
+}
+
+.action-buttons {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: center;
+  gap: 5rem;
+}
+
+.action-buttons button {
+  min-width: 140px;
+  font-weight: 600;
+  text-transform: none;
+  transition: background-color 0.3s ease;
+}
+
+.action-buttons button:hover {
+  filter: brightness(0.9);
+}
+
+.profile-form {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.profile-form .MuiTextField-root {
+  font-size: 1rem;
+}
+
+.alert-container {
+  margin-top: 1rem;
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.alert-error {
+  background-color: #ffebee;
+  color: #b71c1c;
+  border-radius: 6px;
+  padding: 0.8rem 1rem;
+  font-weight: 600;
+}
+
+.alert-success {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+  border-radius: 6px;
+  padding: 0.8rem 1rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+@media (max-width: 480px) {
+  .doctor-profile-container {
+    margin: 1rem;
+    padding: 1rem;
+  }
+
+  .doctor-profile-title {
+    font-size: 1.5rem;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+  }
+
+  .action-buttons button {
+    width: 100%;
+  }
+}

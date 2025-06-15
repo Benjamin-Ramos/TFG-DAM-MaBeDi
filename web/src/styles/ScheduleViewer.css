@@ -1,0 +1,38 @@
+.schedule-container table {
+  table-layout: fixed;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.schedule-container th,
+.schedule-container td {
+  width: 120px;
+  height: 50px;
+  padding: 4px;
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border: 2px solid #ddd;
+}
+
+.schedule-container .time-column {
+  width: 80px;
+  font-weight: bold;
+}
+
+.schedule-container button {
+  width: 90%;
+  height: 90%;
+  font-size: 12px;
+  font-weight: bold;
+  background: #a7e5fa;
+  color: #000000;
+  border-radius: 4px;
+  transition: background 0.4s ease;
+}
+
+.schedule-container button:hover {
+  background: #18a0d1f7;
+}
