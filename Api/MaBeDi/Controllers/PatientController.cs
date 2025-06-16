@@ -35,7 +35,7 @@ public class PatientController : Controller
         return Ok(patients);
     }
 
-    [Authorize(Roles = "Doctor, Administrator, Patient")]
+    [Authorize]
     [HttpGet("patients/{id}")]
     public IActionResult GetPatient(int id)
     {
