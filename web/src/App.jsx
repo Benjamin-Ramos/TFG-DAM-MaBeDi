@@ -207,23 +207,30 @@ export default function App({ token, role, onLogout, doctorId }) {
   };
 
   const handleSavePatient = async (newPat) => {
-    try {
-      const response = await axios.post(
-        "https://tfg-dam-mabedi.onrender.com/auth/register/patient",
-        newPat,
-        config
-      );
-      if (!Array.isArray(patients)) {
-        setPatients([response.data]);
-      } else {
-        setPatients((prev) => [...prev, response.data]);
-      }
-      handleDialogClose();
-    } catch (error) {
-      console.error("Error guardando paciente:", error);
-      alert("Error al guardar paciente");
+  try {
+    const token = localStorage.getItem("token");
+    const config = {
+      headers: { Authorization: `Bearer ${token}` },
+    };
+
+    const response = await axios.post(
+      "https://tfg-dam-mabedi.onrender.com/auth/register/patient",
+      newPat,
+      config
+    );
+
+    if (!Array.isArray(patients)) {
+      setPatients([response.data]);
+    } else {
+      setPatients((prev) => [...prev, response.data]);
     }
-  };
+
+    handleDialogClose();
+  } catch (error) {
+    console.error("Error guardando paciente:", error);
+    alert("Error al guardar paciente");
+  }
+};
 
   const handleSaveAppointment = async (newAppointment) => {
     await fetchAppointments();
@@ -453,19 +460,19 @@ export default function App({ token, role, onLogout, doctorId }) {
       </Box>
       </Paper>
 
-      {/* Dialogs para formularios */}
+      {}
 
       <Dialog open={openDialog === "doctor"} onClose={handleDialogClose} maxWidth="sm" fullWidth>
         <DialogTitle>Nuevo Doctor</DialogTitle>
         <DialogContent>
-          <DoctorForm onSave={handleSaveDoctor} onCancel={handleDialogClose} />
+          <DoctorForm onSave={handleSaveDoctor} role={role} onCancel={handleDialogClose} />
         </DialogContent>
       </Dialog>
 
       <Dialog open={openDialog === "patient"} onClose={handleDialogClose} maxWidth="sm" fullWidth>
         <DialogTitle>Nuevo Paciente</DialogTitle>
         <DialogContent>
-          <PatientForm onSave={handleSavePatient} onCancel={handleDialogClose} />
+          <PatientForm onSaved={handleSavePatient} role={role} onCancel={handleDialogClose} />
         </DialogContent>
       </Dialog>
 

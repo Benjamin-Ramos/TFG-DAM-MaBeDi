@@ -63,7 +63,7 @@ public class AuthController : ControllerBase
 
     [Authorize(Roles = "Administrator")]
     [HttpPost("register/doctor")]
-    public async Task<IActionResult> RegisterDoctor(RegisterDoctorRequest request)
+    public async Task<IActionResult> RegisterDoctor([FromBody] RegisterDoctorRequest request)
     {
         if (_context.Users.Any(u => u.Username == request.Username))
             return BadRequest("Username already exists");
@@ -95,7 +95,7 @@ public class AuthController : ControllerBase
 
     [Authorize(Roles = "Administrator")]
     [HttpPost("register/patient")]
-    public async Task<IActionResult> RegisterPatient(RegisterPatientRequest request)
+    public async Task<IActionResult> RegisterPatient([FromBody] RegisterPatientRequest request)
     {
         if (_context.Users.Any(u => u.Username == request.Username))
             return BadRequest("Username already exists");
