@@ -10,6 +10,16 @@ using System.Security.Claims;
 namespace MaBeDi.Services;
 
 [ApiController]
+[Route("/")]
+public class RootController : ControllerBase
+{
+    [HttpGet]
+    public IActionResult Get()
+    {
+        return Ok("MABEDI API está funcionando correctamente.");
+    }
+}
+
 [Route("auth")]
 public class AuthController : ControllerBase
 {
