@@ -25,7 +25,7 @@ useEffect(() => {
       const date = selectedWeekStart.format("YYYY-MM-DD");
       console.log("Enviando startDate a API:", date);
       const res = await axios.get(
-        `https://tfg-gestion-consultas-medicas.onrender.com/Doctor/doctor/${doctorId}/weekly-schedule?startDate=${date}`,
+        `https://tfg-dam-mabedi.onrender.com/Doctor/doctor/${doctorId}/weekly-schedule?startDate=${date}`,
         config
       );
 

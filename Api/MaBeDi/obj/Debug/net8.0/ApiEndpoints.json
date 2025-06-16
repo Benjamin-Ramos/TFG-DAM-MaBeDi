@@ -218,22 +218,6 @@
   },
   {
     "ContainingType": "MaBeDi.Services.AuthController",
-    "Method": "RegisterAdmin",
-    "RelativePath": "auth/register/admin",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "request",
-        "Type": "MaBeDi.DTOs.RegisterAdminRequest",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "MaBeDi.Services.AuthController",
     "Method": "RegisterDoctor",
     "RelativePath": "auth/register/doctor",
     "HttpMethod": "POST",

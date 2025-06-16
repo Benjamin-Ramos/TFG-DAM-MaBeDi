@@ -28,7 +28,7 @@ export default function Login({ onLogin }) {
     setLoading(true);
     try {
       const response = await axios.post(
-        "https://tfg-gestion-consultas-medicas.onrender.com/auth/login",
+        "https://tfg-dam-mabedi.onrender.com/auth/login",
         { username, password }
       );
       const { token, role } = response.data;

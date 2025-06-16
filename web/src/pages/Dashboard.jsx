@@ -27,9 +27,9 @@ export default function Dashboard({ token, role }) {
       };
 
       const [doctorsRes, patientsRes, appointmentsRes] = await Promise.all([
-        axios.get("https://tfg-gestion-consultas-medicas.onrender.com/Doctor/doctors", config),
-        axios.get("https://tfg-gestion-consultas-medicas.onrender.com/Patient/patients", config),
-        axios.get("https://tfg-gestion-consultas-medicas.onrender.com/Appointment/appointments", config),
+        axios.get("https://tfg-dam-mabedi.onrender.com/Doctor/doctors", config),
+        axios.get("https://tfg-dam-mabedi.onrender.com/Patient/patients", config),
+        axios.get("https://tfg-dam-mabedi.onrender.com/Appointment/appointments", config),
       ]);
 
       setDoctors(doctorsRes.data);

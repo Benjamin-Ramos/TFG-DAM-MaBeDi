@@ -61,12 +61,12 @@ export default function App({ token, role, onLogout, doctorId }) {
       let apptRes;
       if (isDoctor) {
         apptRes = await axios.get(
-          `https://tfg-gestion-consultas-medicas.onrender.com/Appointment/appointments/doctor/${doctorId}`,
+          `https://tfg-dam-mabedi.onrender.com/Appointment/appointments/doctor/${doctorId}`,
           config
         );
       } else {
         apptRes = await axios.get(
-          "https://tfg-gestion-consultas-medicas.onrender.com/Appointment/appointments",
+          "https://tfg-dam-mabedi.onrender.com/Appointment/appointments",
           config
         );
       }
@@ -90,13 +90,13 @@ export default function App({ token, role, onLogout, doctorId }) {
       try {
         const docRes = isAdmin
           ? await axios.get(
-              "https://tfg-gestion-consultas-medicas.onrender.com/Doctor/doctors",
+              "https://tfg-dam-mabedi.onrender.com/Doctor/doctors",
               config
             )
           : { data: [] };
 
         const patRes = await axios.get(
-          "https://tfg-gestion-consultas-medicas.onrender.com/Patient/patients",
+          "https://tfg-dam-mabedi.onrender.com/Patient/patients",
           config
         );
         await fetchAppointments();
@@ -105,7 +105,7 @@ export default function App({ token, role, onLogout, doctorId }) {
 
         if (isDoctor) {
           const scheduleRes = await axios.get(
-            `https://tfg-gestion-consultas-medicas.onrender.com/Doctor/doctors/${doctorId}`,
+            `https://tfg-dam-mabedi.onrender.com/Doctor/doctors/${doctorId}`,
             config
           );
           setDoctorSchedule(scheduleRes.data.schedules || []);
@@ -124,7 +124,7 @@ export default function App({ token, role, onLogout, doctorId }) {
   const handleUpdateDoctor = async (updatedDoctor) => {
     try {
       await axios.put(
-        `https://tfg-gestion-consultas-medicas.onrender.com/Doctor/update/${updatedDoctor.id}`,
+        `https://tfg-dam-mabedi.onrender.com/Doctor/update/${updatedDoctor.id}`,
         updatedDoctor,
         config
       );
@@ -140,7 +140,7 @@ export default function App({ token, role, onLogout, doctorId }) {
   const handleUpdatePatient = async (updatedPatient) => {
     try {
       await axios.put(
-        `https://tfg-gestion-consultas-medicas.onrender.com/Patient/update/${updatedPatient.id}`,
+        `https://tfg-dam-mabedi.onrender.com/Patient/update/${updatedPatient.id}`,
         updatedPatient,
         config
       );
@@ -156,7 +156,7 @@ export default function App({ token, role, onLogout, doctorId }) {
   const handleDeletePatient = async (patientId) => {
     try {
       await axios.delete(
-        `https://tfg-gestion-consultas-medicas.onrender.com/Patient/delete/${patientId}`,
+        `https://tfg-dam-mabedi.onrender.com/Patient/delete/${patientId}`,
         config
       );
       setPatients((prev) => (Array.isArray(prev) ? prev.filter((p) => p.id !== patientId) : []));
@@ -169,7 +169,7 @@ export default function App({ token, role, onLogout, doctorId }) {
   const handleDeleteDoctor = async (doctorId) => {
     try {
       await axios.delete(
-        `https://tfg-gestion-consultas-medicas.onrender.com/Doctor/doctors/${doctorId}`,
+        `https://tfg-dam-mabedi.onrender.com/Doctor/doctors/${doctorId}`,
         config
       );
       setDoctors((prev) => (Array.isArray(prev) ? prev.filter((d) => d.id !== doctorId) : []));
@@ -190,7 +190,7 @@ export default function App({ token, role, onLogout, doctorId }) {
   const handleSaveDoctor = async (newDoc) => {
     try {
       const response = await axios.post(
-        "https://tfg-gestion-consultas-medicas.onrender.com/auth/register/doctor",
+        "https://tfg-dam-mabedi.onrender.com/auth/register/doctor",
         newDoc,
         config
       );
@@ -209,7 +209,7 @@ export default function App({ token, role, onLogout, doctorId }) {
   const handleSavePatient = async (newPat) => {
     try {
       const response = await axios.post(
-        "https://tfg-gestion-consultas-medicas.onrender.com/auth/register/patient",
+        "https://tfg-dam-mabedi.onrender.com/auth/register/patient",
         newPat,
         config
       );

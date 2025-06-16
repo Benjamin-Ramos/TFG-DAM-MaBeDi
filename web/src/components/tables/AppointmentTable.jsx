@@ -32,7 +32,7 @@ export default function AppointmentTable({
     const updatedStatus = statusUpdates[appt.id] || appt.status;
     try {
       await axios.put(
-        `https://tfg-gestion-consultas-medicas.onrender.com/Appointment/update/${appt.id}`,
+        `https://tfg-dam-mabedi.onrender.com/Appointment/update/${appt.id}`,
         { status: updatedStatus },
         config
       );
@@ -47,7 +47,7 @@ export default function AppointmentTable({
   const deleteAppointment = async (id) => {
     if (!window.confirm("¿Eliminar esta cita?")) return;
     try {
-      await axios.delete(`https://tfg-gestion-consultas-medicas.onrender.com/Appointment/delete/${id}`, config);
+      await axios.delete(`https://tfg-dam-mabedi.onrender.com/Appointment/delete/${id}`, config);
       refresh?.();
     } catch (error) {
       console.error(error);

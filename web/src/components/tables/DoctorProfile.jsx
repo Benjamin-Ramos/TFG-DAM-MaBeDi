@@ -28,7 +28,7 @@ export default function DoctorProfile({ doctorId, token }) {
       try {
         const config = { headers: { Authorization: `Bearer ${token}` } };
         const response = await axios.get(
-          `https://tfg-gestion-consultas-medicas.onrender.com/Doctor/doctors/${doctorId}`,
+          `https://tfg-dam-mabedi.onrender.com/Doctor/doctors/${doctorId}`,
           config
         );
         setDoctor(response.data);
@@ -65,7 +65,7 @@ export default function DoctorProfile({ doctorId, token }) {
       const config = { headers: { Authorization: `Bearer ${token}` } };
       if (formData.email !== originalEmail) {
       await axios.post(
-        "https://tfg-gestion-consultas-medicas.onrender.com/Auth/request-email-change",
+        "https://tfg-dam-mabedi.onrender.com/Auth/request-email-change",
         { newEmail: formData.email },
         config
       );
@@ -76,7 +76,7 @@ export default function DoctorProfile({ doctorId, token }) {
       setEditingProfile(false);
     } else {
       await axios.put(
-        `https://tfg-gestion-consultas-medicas.onrender.com/Doctor/doctors/${doctorId}`,
+        `https://tfg-dam-mabedi.onrender.com/Doctor/doctors/${doctorId}`,
         {
           name: formData.name,
           dni: formData.dni,
@@ -114,7 +114,7 @@ export default function DoctorProfile({ doctorId, token }) {
     try {
       const config = { headers: { Authorization: `Bearer ${token}` } };
       await axios.post(
-        "https://tfg-gestion-consultas-medicas.onrender.com/Auth/change-password",
+        "https://tfg-dam-mabedi.onrender.com/Auth/change-password",
         {
           currentPassword: passwordData.currentPassword,
           newPassword: passwordData.newPassword,

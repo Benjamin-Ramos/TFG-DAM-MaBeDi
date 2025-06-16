@@ -32,7 +32,7 @@ export default function AppointmentForm({
       try {
         const config = { headers: { Authorization: `Bearer ${token}` } };
         const response = await axios.get(
-          `https://tfg-gestion-consultas-medicas.onrender.com/Doctor/doctors/${currentDoctorId}`,
+          `https://tfg-dam-mabedi.onrender.com/Doctor/doctors/${currentDoctorId}`,
           config
         );
         setDoctor(response.data);
@@ -88,7 +88,7 @@ export default function AppointmentForm({
         },
       };
       await axios.post(
-        "https://tfg-gestion-consultas-medicas.onrender.com/Appointment/appointments/register",
+        "https://tfg-dam-mabedi.onrender.com/Appointment/appointments/register",
         appointmentData,
         config
       );

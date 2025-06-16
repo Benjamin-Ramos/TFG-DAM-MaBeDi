@@ -33,7 +33,7 @@ export default function PatientForm({ onSaved }) {
       };
 
       const response = await axios.post(
-        "https://tfg-gestion-consultas-medicas.onrender.com/auth/register/patient",
+        "https://tfg-dam-mabedi.onrender.com/auth/register/patient",
         form,
         config
       );
