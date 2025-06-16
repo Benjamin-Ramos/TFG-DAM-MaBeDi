@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MaBeDi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ae474e1254484f12668218c3c7421a911dca9ef4")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8f5993fd12be54551861ba0e57874a45bee1de89")]
 [assembly: System.Reflection.AssemblyProductAttribute("MaBeDi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MaBeDi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

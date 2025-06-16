@@ -3,6 +3,14 @@
   "WorkspaceRootPath": "C:\\Users\\Benjamin\\Documents\\test\\TFG-Gestion-Consultas-Medicas\\Api\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{2E06B189-3868-411C-9174-5996C241CFC2}|MaBeDi\\MaBeDi.csproj|c:\\users\\benjamin\\documents\\test\\tfg-gestion-consultas-medicas\\api\\mabedi\\controllers\\patientcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2E06B189-3868-411C-9174-5996C241CFC2}|MaBeDi\\MaBeDi.csproj|solutionrelative:mabedi\\controllers\\patientcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2E06B189-3868-411C-9174-5996C241CFC2}|MaBeDi\\MaBeDi.csproj|c:\\users\\benjamin\\documents\\test\\tfg-gestion-consultas-medicas\\api\\mabedi\\services\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2E06B189-3868-411C-9174-5996C241CFC2}|MaBeDi\\MaBeDi.csproj|solutionrelative:mabedi\\services\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{2E06B189-3868-411C-9174-5996C241CFC2}|MaBeDi\\MaBeDi.csproj|c:\\users\\benjamin\\documents\\test\\tfg-gestion-consultas-medicas\\api\\mabedi\\controllers\\appointmentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2E06B189-3868-411C-9174-5996C241CFC2}|MaBeDi\\MaBeDi.csproj|solutionrelative:mabedi\\controllers\\appointmentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -18,21 +26,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 5,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "DoctorController.cs",
-              "DocumentMoniker": "C:\\Users\\Benjamin\\Documents\\test\\TFG-Gestion-Consultas-Medicas\\Api\\MaBeDi\\Controllers\\DoctorController.cs",
-              "RelativeDocumentMoniker": "MaBeDi\\Controllers\\DoctorController.cs",
-              "ToolTip": "C:\\Users\\Benjamin\\Documents\\test\\TFG-Gestion-Consultas-Medicas\\Api\\MaBeDi\\Controllers\\DoctorController.cs",
-              "RelativeToolTip": "MaBeDi\\Controllers\\DoctorController.cs",
-              "ViewState": "AgIAAPQAAAAAAAAAAAAmwP8AAAAhAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-15T20:20:48.021Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
@@ -56,6 +51,44 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "PatientController.cs",
+              "DocumentMoniker": "C:\\Users\\Benjamin\\Documents\\test\\TFG-Gestion-Consultas-Medicas\\Api\\MaBeDi\\Controllers\\PatientController.cs",
+              "RelativeDocumentMoniker": "MaBeDi\\Controllers\\PatientController.cs",
+              "ToolTip": "C:\\Users\\Benjamin\\Documents\\test\\TFG-Gestion-Consultas-Medicas\\Api\\MaBeDi\\Controllers\\PatientController.cs*",
+              "RelativeToolTip": "MaBeDi\\Controllers\\PatientController.cs*",
+              "ViewState": "AgIAABsAAAAAAAAAAAAuwC8AAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-16T16:43:37.359Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "C:\\Users\\Benjamin\\Documents\\test\\TFG-Gestion-Consultas-Medicas\\Api\\MaBeDi\\Services\\AuthController.cs",
+              "RelativeDocumentMoniker": "MaBeDi\\Services\\AuthController.cs",
+              "ToolTip": "C:\\Users\\Benjamin\\Documents\\test\\TFG-Gestion-Consultas-Medicas\\Api\\MaBeDi\\Services\\AuthController.cs",
+              "RelativeToolTip": "MaBeDi\\Services\\AuthController.cs",
+              "ViewState": "AgIAAIoAAAAAAAAAAAAowAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-16T15:49:16.345Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "DoctorController.cs",
+              "DocumentMoniker": "C:\\Users\\Benjamin\\Documents\\test\\TFG-Gestion-Consultas-Medicas\\Api\\MaBeDi\\Controllers\\DoctorController.cs",
+              "RelativeDocumentMoniker": "MaBeDi\\Controllers\\DoctorController.cs",
+              "ToolTip": "C:\\Users\\Benjamin\\Documents\\test\\TFG-Gestion-Consultas-Medicas\\Api\\MaBeDi\\Controllers\\DoctorController.cs",
+              "RelativeToolTip": "MaBeDi\\Controllers\\DoctorController.cs",
+              "ViewState": "AgIAAPQAAAAAAAAAAAAmwP8AAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-15T20:20:48.021Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "AppointmentController.cs",
               "DocumentMoniker": "C:\\Users\\Benjamin\\Documents\\test\\TFG-Gestion-Consultas-Medicas\\Api\\MaBeDi\\Controllers\\AppointmentController.cs",
               "RelativeDocumentMoniker": "MaBeDi\\Controllers\\AppointmentController.cs",

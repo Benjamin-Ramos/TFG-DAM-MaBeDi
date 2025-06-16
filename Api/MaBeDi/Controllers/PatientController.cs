@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using MaBeDi.Persistence;
 using MaBeDi.DTOs;
 using System.Numerics;
-using System.Security.Claims;
 
 namespace MaBeDi.Controllers;
 
@@ -40,14 +39,6 @@ public class PatientController : Controller
     [HttpGet("patients/{id}")]
     public IActionResult GetPatient(int id)
     {
-        var userId = int.Parse(User.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").Value);
-        var userRole = User.FindFirst(ClaimTypes.Role).Value;
-
-        if (userRole == "Patient" && userId != id)
-        {
-            return Forbid();
-        }
-
         var patient = _context.Users
             .Where(u => u.Role == Enum.UserRole.Patient && u.Id == id)
             .Select(p => new
