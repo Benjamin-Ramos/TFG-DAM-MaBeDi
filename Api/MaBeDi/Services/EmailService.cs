@@ -18,12 +18,14 @@ public class EmailService
         using var client = new SmtpClient(_settings.SmtpServer, _settings.Port)
         {
             Credentials = new NetworkCredential(_settings.Username, _settings.Password),
-            EnableSsl = true
+            EnableSsl = true,
+            DeliveryMethod = SmtpDeliveryMethod.Network,
+            UseDefaultCredentials = false
         };
 
         var message = new MailMessage
         {
-            From = new MailAddress(_settings.From),
+            From = new MailAddress(_settings.From, _settings.SenderName),
             Subject = subject,
             Body = htmlContent,
             IsBodyHtml = true
