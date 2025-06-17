@@ -145,10 +145,12 @@ public class AuthController : ControllerBase
             return BadRequest("Username and password are required.");
         }
 
-        var user = _context.Users.FirstOrDefault(u => u.Username == request.Username);
+        var identifier = request.Username;
+        var user = _context.Users
+            .FirstOrDefault(u => u.Username == identifier || u.Email == identifier);
 
         if (user == null)
-        {   
+        {
             return Unauthorized("Invalid credentials.");
         }
 
@@ -183,7 +185,9 @@ public class AuthController : ControllerBase
             return BadRequest("Username and password are required.");
         }
 
-        var user = _context.Users.FirstOrDefault(u => u.Username == request.Username);
+        var identifier = request.Username;
+        var user = _context.Users
+            .FirstOrDefault(u => u.Username == identifier || u.Email == identifier);
 
         if (user == null)
         {
