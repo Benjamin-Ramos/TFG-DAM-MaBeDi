@@ -76,7 +76,7 @@ export default function AppointmentForm({
     const appointmentData = {
       patientId: selectedPatientId,
       doctorId: selectedDoctorId,
-      appointmentDateTime: roundedDateTime.toISOString(),
+      appointmentDateTime: new Date(roundedDateTime.getTime() - roundedDateTime.getTimezoneOffset() * 60000).toISOString(),
       status: "Programada",
     };
 

@@ -143,9 +143,19 @@ export default function AppointmentTable({
                       <button onClick={() => saveStatus(appt)}>Guardar</button>
                     ) : (
                       <>
-                        <button onClick={() => deleteAppointment(appt.id)}>Eliminar</button>
-                        <button onClick={() => generatePDF(appt)}>Imprimir</button>
-                      </>
+                      <button
+                        className="btn-action btn-delete"
+                        onClick={() => deleteAppointment(appt.id)}
+                      >
+                        Eliminar
+                      </button>
+                      <button
+                        className="btn-action btn-print"
+                        onClick={() => generatePDF(appt)}
+                      >
+                        Imprimir
+                      </button>
+                    </>
                     )}
                   </td>
                 </tr>

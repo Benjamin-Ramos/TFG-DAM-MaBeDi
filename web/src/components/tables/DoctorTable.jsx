@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Dialog,
   DialogTitle,
@@ -13,7 +13,17 @@ export default function DoctorTable({ doctors, onUpdateDoctor, onDeleteDoctor })
   const [selectedDoctor, setSelectedDoctor] = useState(null);
   const [editedData, setEditedData] = useState({});
 
-  const doctorArray = doctors && Array.isArray(doctors.$values) ? doctors.$values : doctors || [];
+  const [doctorArray, setDoctorArray] = useState([]);
+
+  useEffect(() => {
+    if (doctors?.$values) {
+      setDoctorArray(doctors.$values);
+    } else if (Array.isArray(doctors)) {
+      setDoctorArray(doctors);
+    } else {
+      setDoctorArray([]);
+    }
+  }, [doctors]);
 
   const handleRowClick = (doctor) => {
     setSelectedDoctor(doctor);
@@ -56,9 +66,9 @@ export default function DoctorTable({ doctors, onUpdateDoctor, onDeleteDoctor })
           </thead>
           <tbody>
             {doctorArray.length > 0 ? (
-              doctorArray.map((doc) => (
+              doctorArray.map((doc, index) => (
                 <tr
-                  key={doc.id}
+                  key={doc.id || index}
                   onClick={() => handleRowClick(doc)}
                   style={{ cursor: "pointer" }}
                 >

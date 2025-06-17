@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { TextField, Button, Box, Typography } from "@mui/material";
+import axios from "axios";
 import "../../styles/FormStyles.css";
 
-export default function PatientForm({ onSaved, role }) {
+export default function PatientForm({ onSaved, token }) {
   const [form, setForm] = useState({
     username: "",
     password: "",
@@ -27,26 +28,31 @@ export default function PatientForm({ onSaved, role }) {
     setLoading(true);
 
     try {
-      if (Object.values(form).some((value) => value === "")) {
-        setError("Por favor completa todos los campos.");
-        setLoading(false);
-        return;
-      }
+      const patientData = {
+        username: form.username,
+        password: form.password,
+        name: form.name,
+        dni: form.dni,
+        phoneNumber: form.phoneNumber,
+        email: form.email,
+        birthDate: form.birthDate,
+      };
 
-      await onSaved(form);
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
 
-      setForm({
-        username: "",
-        password: "",
-        name: "",
-        dni: "",
-        phoneNumber: "",
-        email: "",
-        birthDate: "",
-      });
-    } catch (err) {
-      console.error(err);
-      setError("Error al guardar el paciente.");
+      await axios.post(
+        "https://tfg-dam-mabedi.onrender.com/auth/register/patient",
+        patientData,
+        config
+      );
+      onSaved();
+    } catch (error) {
+      console.error("Error al guardar el paciente:", error);
+      alert("Hubo un error al guardar el paciente.");
     } finally {
       setLoading(false);
     }

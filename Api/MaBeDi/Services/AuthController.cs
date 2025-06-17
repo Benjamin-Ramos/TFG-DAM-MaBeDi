@@ -159,6 +159,11 @@ public class AuthController : ControllerBase
             return Unauthorized("Invalid credentials.");
         }
 
+        if (user.Role == UserRole.Patient)
+        {
+            return Unauthorized("Patients can´t log in.");
+        }
+
         var token = _jwtTokenGenerator.GenerateJwtToken(user);
 
         Response.Headers.Append("X-Role", user.Role.ToString());

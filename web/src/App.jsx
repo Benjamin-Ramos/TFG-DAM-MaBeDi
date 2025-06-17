@@ -77,6 +77,34 @@ export default function App({ token, role, onLogout, doctorId }) {
     }
   };
 
+  const fetchPatients = async () => {
+    try {
+      let patRes;
+      patRes = await axios.get (
+        `https://tfg-dam-mabedi.onrender.com/Patient/patients`,
+        config
+      );
+      setPatients(patRes.data?.$values || []);
+    } catch (error) {
+      console.error("Error obteniendo pacientes:", error);
+      alert("Error al obtener la lista de pacientes");
+    }
+  };
+
+  const fetchDoctors = async () => {
+    try {
+      let docRes;
+      docRes = await axios.get (        
+        `https://tfg-dam-mabedi.onrender.com/Doctor/doctors` ,
+        config
+      );
+      setDoctors(docRes.data?.$values || []);
+    } catch (error) {
+      console.error("Error obteniendo doctores:", error);
+      alert("Error al obtener la lista de doctores");
+    }
+  };
+
   useEffect(() => {
     if (!isAdmin && !isDoctor) {
       setError("No tienes permisos para ver esta información.");
@@ -88,21 +116,9 @@ export default function App({ token, role, onLogout, doctorId }) {
       setLoading(true);
       setError("");
       try {
-        const docRes = isAdmin
-          ? await axios.get(
-              "https://tfg-dam-mabedi.onrender.com/Doctor/doctors",
-              config
-            )
-          : { data: [] };
-
-        const patRes = await axios.get(
-          "https://tfg-dam-mabedi.onrender.com/Patient/patients",
-          config
-        );
         await fetchAppointments();
-        setDoctors(Array.isArray(docRes.data.$values) ? docRes.data.$values : []);
-        setPatients(Array.isArray(patRes.data.$values) ? patRes.data.$values : []);
-
+        await fetchDoctors();
+        await fetchPatients();
         if (isDoctor) {
           const scheduleRes = await axios.get(
             `https://tfg-dam-mabedi.onrender.com/Doctor/doctors/${doctorId}`,
@@ -188,49 +204,14 @@ export default function App({ token, role, onLogout, doctorId }) {
   const handleDialogClose = () => setOpenDialog(null);
 
   const handleSaveDoctor = async (newDoc) => {
-    try {
-      const response = await axios.post(
-        "https://tfg-dam-mabedi.onrender.com/auth/register/doctor",
-        newDoc,
-        config
-      );
-      if (!Array.isArray(doctors)) {
-        setDoctors([response.data]);
-      } else {
-        setDoctors((prev) => [...prev, response.data]);
-      }
-      handleDialogClose();
-    } catch (error) {
-      console.error("Error guardando doctor:", error);
-      alert("Error al guardar doctor");
-    }
+    await fetchDoctors();
+    handleDialogClose();
   };
 
   const handleSavePatient = async (newPat) => {
-  try {
-    const token = localStorage.getItem("token");
-    const config = {
-      headers: { Authorization: `Bearer ${token}` },
-    };
-
-    const response = await axios.post(
-      "https://tfg-dam-mabedi.onrender.com/auth/register/patient",
-      newPat,
-      config
-    );
-
-    if (!Array.isArray(patients)) {
-      setPatients([response.data]);
-    } else {
-      setPatients((prev) => [...prev, response.data]);
-    }
-
+    await fetchPatients();
     handleDialogClose();
-  } catch (error) {
-    console.error("Error guardando paciente:", error);
-    alert("Error al guardar paciente");
   }
-};
 
   const handleSaveAppointment = async (newAppointment) => {
     await fetchAppointments();
@@ -245,6 +226,7 @@ export default function App({ token, role, onLogout, doctorId }) {
           doctors={doctors}
           onUpdateDoctor={handleUpdateDoctor}
           onDeleteDoctor={handleDeleteDoctor}
+          refresh={fetchDoctors}
         />
       ),
     },
@@ -255,6 +237,7 @@ export default function App({ token, role, onLogout, doctorId }) {
           patients={patients}
           onUpdatePatient={handleUpdatePatient}
           onDeletePatient={handleDeletePatient}
+          refresh={fetchPatients}
         />
       ),
     },
@@ -358,7 +341,7 @@ export default function App({ token, role, onLogout, doctorId }) {
             sx={{
             bgcolor: colors.primary,
             color: colors.buttonText,
-            "&:hover": { bgcolor: "#115293" },
+            "&:hover": { bgcolor: "#bf5e19" },
             }}>
               <svg xmlns="http://www.w3.org/2000/svg" className="button-icon" viewBox="0 0 20 20" fill="currentColor">
                 <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
@@ -465,21 +448,21 @@ export default function App({ token, role, onLogout, doctorId }) {
       <Dialog open={openDialog === "doctor"} onClose={handleDialogClose} maxWidth="sm" fullWidth>
         <DialogTitle>Nuevo Doctor</DialogTitle>
         <DialogContent>
-          <DoctorForm onSave={handleSaveDoctor} role={role} onCancel={handleDialogClose} />
+          <DoctorForm onSaved={handleSaveDoctor} onCancel={handleDialogClose} token={token} />
         </DialogContent>
       </Dialog>
 
       <Dialog open={openDialog === "patient"} onClose={handleDialogClose} maxWidth="sm" fullWidth>
         <DialogTitle>Nuevo Paciente</DialogTitle>
         <DialogContent>
-          <PatientForm onSaved={handleSavePatient} role={role} onCancel={handleDialogClose} />
+          <PatientForm onSaved={handleSavePatient} onCancel={handleDialogClose} token={token}/>
         </DialogContent>
       </Dialog>
 
       <Dialog open={openDialog === "appointment"} onClose={handleDialogClose} maxWidth="sm" fullWidth>
         <DialogTitle>Nueva Cita</DialogTitle>
         <DialogContent>
-          <AppointmentForm onSaved={handleSaveAppointment} role={role} currentDoctorId={doctorId} doctors={doctors} patients={patients} token={token} onSave={handleSaveAppointment} onCancel={handleDialogClose} />
+          <AppointmentForm onSaved={handleSaveAppointment} role={role} currentDoctorId={doctorId} doctors={doctors} patients={patients} token={token} onCancel={handleDialogClose} />
         </DialogContent>
       </Dialog>
     </Box>

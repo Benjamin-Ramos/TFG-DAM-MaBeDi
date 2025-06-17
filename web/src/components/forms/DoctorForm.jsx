@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import "../../styles/FormStyles.css";
+import axios from "axios";
 
 const daysOfWeek = [
   { value: 1, label: "Lunes" },
@@ -19,7 +20,10 @@ const daysOfWeek = [
   { value: 5, label: "Viernes" },
 ];
 
-export default function DoctorForm({ onSaved }) {
+export default function DoctorForm({ 
+  onSaved,
+  token
+}) {
   const [form, setForm] = useState({
     username: "",
     password: "",
@@ -32,6 +36,7 @@ export default function DoctorForm({ onSaved }) {
   });
 
   const [errors, setErrors] = useState({ schedules: {}, password: "" });
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (field) => (e) => {
     setForm({ ...form, [field]: e.target.value });
@@ -93,7 +98,7 @@ export default function DoctorForm({ onSaved }) {
       ...form,
       schedules: [
         ...form.schedules,
-        { dayOfWeek: diaDisponible.value, entryTime: "", exitTime: "" },
+        { id: crypto.randomUUID(), dayOfWeek: diaDisponible.value, entryTime: "", exitTime: "" }
       ],
     });
   };
@@ -137,8 +142,9 @@ export default function DoctorForm({ onSaved }) {
     return valid;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (!validateForm()) return;
 
     const formattedSchedules = form.schedules.map((s) => ({
@@ -147,7 +153,7 @@ export default function DoctorForm({ onSaved }) {
       exitTime: s.exitTime + ":00",
     }));
 
-    const dataToSend = {
+    const doctorData = {
       username: form.username.trim(),
       password: form.password,
       name: form.name.trim(),
@@ -158,7 +164,25 @@ export default function DoctorForm({ onSaved }) {
       schedules: formattedSchedules,
     };
 
-    onSaved(dataToSend);
+    try {
+      setLoading(true);
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      await axios.post(
+        "https://tfg-dam-mabedi.onrender.com/auth/register/doctor",
+        doctorData,
+        config
+      );
+      onSaved();
+    } catch (error) {
+      console.error("Error al guardar el doctor:", error);
+      alert("Hubo un error al guardar el doctor.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -245,7 +269,7 @@ export default function DoctorForm({ onSaved }) {
       {form.schedules.map((schedule, idx) => {
         const availableDays = getAvailableDays(idx);
         return (
-          <Box key={`schedule-${schedule.dayOfWeek}-${idx}`} className="schedule-row" sx={{ display: "flex", alignItems: "center", gap: 1, mb: 1 }}>
+          <Box key={schedule.id} className="schedule-row" sx={{ display: "flex", alignItems: "center", gap: 1, mb: 1 }}>
             <TextField
               select
               label="Día de la semana"
