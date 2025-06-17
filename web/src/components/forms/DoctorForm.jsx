@@ -245,8 +245,8 @@ export default function DoctorForm({
         fullWidth
         required
         margin="normal"
-        error={Boolean(errors.password)}
-        helperText={errors.password}
+        error={Boolean(errors.dni)}
+        helperText={errors.dni}
       />
 
       <TextField
@@ -268,13 +268,13 @@ export default function DoctorForm({
         fullWidth
         required
         margin="normal"
-        error={Boolean(errors.password)}
-        helperText={errors.password}
+        error={Boolean(errors.email)}
+        helperText={errors.email}
       />
 
       <TextField
         label="Fecha de Nacimiento"
-        name="birthdate"
+        name="birthDate"
         type="date"
         value={form.birthDate}
         onChange={handleChange}

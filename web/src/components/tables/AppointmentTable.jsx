@@ -140,7 +140,9 @@ export default function AppointmentTable({
                   </td>
                   <td>
                     {editingId === appt.id ? (
-                      <button onClick={() => saveStatus(appt)}>Guardar</button>
+                      <button
+                        className="btn-action btn-save"
+                        onClick={() => saveStatus(appt)}>Guardar</button>
                     ) : (
                       <>
                       <button

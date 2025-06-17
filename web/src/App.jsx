@@ -372,7 +372,7 @@ export default function App({ token, role, onLogout, doctorId }) {
             variant="contained"
             onClick={() => handleDialogOpen("appointment")}
             sx={{
-            bgcolor: "#388e3c",
+            bgcolor: "#3fb546",
             color: colors.buttonText,
             "&:hover": { bgcolor: "#2e7d32" },
             }}>

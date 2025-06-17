@@ -55,6 +55,14 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+.btn-action {
+  background-color: #0db14e;
+}
+
+.btn-action:hover {
+  background-color: #109646;
+}
+
 .btn-delete {
   background-color: #e53935;
 }
