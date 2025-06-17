@@ -15,16 +15,57 @@ export default function PatientForm({ onSaved, token }) {
   });
 
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [errors, setErrors] = useState({});
+  
+  const dniRegex = /^[0-9]{8}[A-Z]$/;
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  const validatePassword = (value = form.password) => {
+    let errorMsg = "";
+    if (!value) {
+      errorMsg = "La contraseña es requerida";
+    } else if (value.length < 6) {
+      errorMsg = "La contraseña debe tener al menos 6 caracteres";
+    }
+    setErrors((prev) => ({ ...prev, password: errorMsg }));
+    return !errorMsg;
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
+
+    if (name === "dni") {
+      setErrors((prev) => ({
+        ...prev,
+        dni: dniRegex.test(value) ? "" : "El DNI debe tener 8 números y una letra mayúscula.",
+      }));
+    } else if (name === "email") {
+      setErrors((prev) => ({
+        ...prev,
+        email: emailRegex.test(value) ? "" : "Correo con formato no válido.",
+      }));
+    } else if (name === "password") {
+      validatePassword(value);
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("");
+    setErrors({});
+    
+    if (!dniRegex.test(form.dni)) {
+      setErrors((prev) => ({ ...prev, dni: "El DNI debe tener 8 números seguidos de una letra mayúscula." }));
+      return;
+    }
+
+    if (!emailRegex.test(form.email)) {
+      setErrors((prev) => ({ ...prev, email: "El correo electrónico no tiene un formato válido." }));
+      return;
+    }
+    
+    if (!validatePassword()) return;
+
     setLoading(true);
 
     try {
@@ -91,6 +132,8 @@ export default function PatientForm({ onSaved, token }) {
         autoComplete="current-password"
         onChange={handleChange}
         required
+        error={Boolean(errors.password)}
+        helperText={errors.password}
       />
       <TextField
         label="Nombre completo"
@@ -105,6 +148,8 @@ export default function PatientForm({ onSaved, token }) {
         value={form.dni}
         onChange={handleChange}
         required
+        error={Boolean(errors.dni)}
+        helperText={errors.dni}
       />
       <TextField
         label="Teléfono"
@@ -120,6 +165,8 @@ export default function PatientForm({ onSaved, token }) {
         value={form.email}
         onChange={handleChange}
         required
+        error={Boolean(errors.email)}
+        helperText={errors.email}
       />
       <TextField
         label="Fecha de nacimiento"
@@ -130,12 +177,6 @@ export default function PatientForm({ onSaved, token }) {
         InputLabelProps={{ shrink: true }}
         required
       />
-
-      {error && (
-        <Typography color="error" variant="body2">
-          {error}
-        </Typography>
-      )}
 
       <Button type="submit" variant="contained" disabled={loading}>
         {loading ? "Guardando..." : "Guardar paciente"}

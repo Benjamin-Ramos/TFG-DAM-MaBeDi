@@ -93,12 +93,16 @@ export default function App({ token, role, onLogout, doctorId }) {
 
   const fetchDoctors = async () => {
     try {
-      let docRes;
-      docRes = await axios.get (        
-        `https://tfg-dam-mabedi.onrender.com/Doctor/doctors` ,
-        config
-      );
-      setDoctors(docRes.data?.$values || []);
+      if (isAdmin) {
+        let docRes;
+        docRes = await axios.get (        
+          `https://tfg-dam-mabedi.onrender.com/Doctor/doctors` ,
+          config
+        );
+        setDoctors(docRes.data?.$values || []);
+      } else {
+        setDoctors([]);
+      }
     } catch (error) {
       console.error("Error obteniendo doctores:", error);
       alert("Error al obtener la lista de doctores");

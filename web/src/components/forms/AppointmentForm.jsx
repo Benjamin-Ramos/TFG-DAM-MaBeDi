@@ -14,7 +14,6 @@ export default function AppointmentForm({
   token,
 }) {
   const patientsArray = patients && Array.isArray(patients?.$values) ? patients.$values : patients || [];
-
   const [selectedDoctorId, setSelectedDoctorId] = useState(() =>
     role === "Doctor" ? currentDoctorId || "" : ""
   );

@@ -36,6 +36,16 @@ public class AppointmentController : ControllerBase
         if (time.Minutes != 0 && time.Minutes != 30)
             return BadRequest("Las citas solo pueden programarse a las hh:00 o hh:30.");
 
+        var appointmentDay = request.AppointmentDateTime.DayOfWeek;
+        var schedule = doctor.DoctorSchedules?
+            .FirstOrDefault(s => s.DayOfWeek == appointmentDay &&
+                                 s.EntryTime.HasValue && s.ExitTime.HasValue &&
+                                 time >= s.EntryTime.Value &&
+                                 time < s.ExitTime.Value);
+
+        if (schedule == null)
+            return BadRequest("La cita no está dentro del horario laboral del doctor.");
+
         var overlapping = await _context.Appointments.AnyAsync(a =>
             a.DoctorId == doctor.Id &&
             a.AppointmentDateTime == request.AppointmentDateTime);

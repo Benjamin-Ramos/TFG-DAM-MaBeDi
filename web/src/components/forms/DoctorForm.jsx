@@ -36,25 +36,40 @@ export default function DoctorForm({
   });
 
   const [errors, setErrors] = useState({ schedules: {}, password: "" });
-  const [loading, setLoading] = useState(false);
+  const [, setLoading] = useState(false);
 
-  const handleChange = (field) => (e) => {
-    setForm({ ...form, [field]: e.target.value });
+  const dniRegex = /^[0-9]{8}[A-Z]$/;
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    if (field === "password") {
-      validatePassword(e.target.value);
+  const validatePassword = (value = form.password) => {
+  let errorMsg = "";
+  if (!value) {
+    errorMsg = "La contraseña es requerida";
+  } else if (value.length < 6) {
+    errorMsg = "La contraseña debe tener al menos 6 caracteres";
+  }
+  setErrors((prev) => ({ ...prev, password: errorMsg }));
+  return !errorMsg;
+};
+
+  
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
+
+    if (name === "dni") {
+      setErrors((prev) => ({
+        ...prev,
+        dni: dniRegex.test(value) ? "" : "El DNI debe tener 8 números y una letra mayúscula.",
+      }));
+    } else if (name === "email") {
+      setErrors((prev) => ({
+        ...prev,
+        email: emailRegex.test(value) ? "" : "Correo con formato no válido.",
+      }));
+    } else if (name === "password") {
+      validatePassword(value);
     }
-  };
-
-  const validatePassword = (value) => {
-    let errorMsg = "";
-    if (!value) {
-      errorMsg = "La contraseña es requerida";
-    } else if (value.length < 6) {
-      errorMsg = "La contraseña debe tener al menos 6 caracteres";
-    }
-    setErrors((prev) => ({ ...prev, password: errorMsg }));
-    return !errorMsg;
   };
 
   const handleScheduleChange = (index, field) => (e) => {
@@ -128,24 +143,20 @@ export default function DoctorForm({
     return daysOfWeek.filter((d) => !usadosExceptoActual.includes(d.value));
   };
 
-  const validateForm = () => {
-    let valid = true;
-
-    form.schedules.forEach((schedule, i) => {
-      validateSchedule(i, schedule);
-    });
-
-    if (!validatePassword(form.password)) valid = false;
-
-    if (Object.keys(errors.schedules).length > 0) valid = false;
-
-    return valid;
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!validateForm()) return;
+    if (!dniRegex.test(form.dni)) {
+      setErrors("El DNI debe tener 8 números seguidos de una letra mayúscula.");
+      return;
+    }
+
+    if (!emailRegex.test(form.email)) {
+      setErrors("El correo electrónico no tiene un formato válido.");
+      return;
+    }
+    
+    if (!validatePassword()) return;
 
     const formattedSchedules = form.schedules.map((s) => ({
       dayOfWeek: s.dayOfWeek,
@@ -193,8 +204,9 @@ export default function DoctorForm({
 
       <TextField
         label="Username"
+        name="username"
         value={form.username}
-        onChange={handleChange("username")}
+        onChange={handleChange}
         fullWidth
         autoComplete="current-username"
         required
@@ -203,9 +215,10 @@ export default function DoctorForm({
 
       <TextField
         label="Contraseña"
+        name="password"
         type="password"
         value={form.password}
-        onChange={handleChange("password")}
+        onChange={handleChange}
         fullWidth
         required
         autoComplete="current-password"
@@ -216,8 +229,9 @@ export default function DoctorForm({
 
       <TextField
         label="Nombre Completo"
+        name="name"
         value={form.name}
-        onChange={handleChange("name")}
+        onChange={handleChange}
         fullWidth
         required
         margin="normal"
@@ -225,17 +239,21 @@ export default function DoctorForm({
 
       <TextField
         label="DNI"
+        name="dni"
         value={form.dni}
-        onChange={handleChange("dni")}
+        onChange={handleChange}
         fullWidth
         required
         margin="normal"
+        error={Boolean(errors.password)}
+        helperText={errors.password}
       />
 
       <TextField
         label="Teléfono"
+        name="phoneNumber"
         value={form.phoneNumber}
-        onChange={handleChange("phoneNumber")}
+        onChange={handleChange}
         fullWidth
         required
         margin="normal"
@@ -243,19 +261,23 @@ export default function DoctorForm({
 
       <TextField
         label="Email"
+        name="email"
         type="email"
         value={form.email}
-        onChange={handleChange("email")}
+        onChange={handleChange}
         fullWidth
         required
         margin="normal"
+        error={Boolean(errors.password)}
+        helperText={errors.password}
       />
 
       <TextField
         label="Fecha de Nacimiento"
+        name="birthdate"
         type="date"
         value={form.birthDate}
-        onChange={handleChange("birthDate")}
+        onChange={handleChange}
         fullWidth
         required
         margin="normal"
