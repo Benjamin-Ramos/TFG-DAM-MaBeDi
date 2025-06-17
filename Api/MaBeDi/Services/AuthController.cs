@@ -41,6 +41,7 @@ public class AuthController : ControllerBase
         _appSettings = appSettings;
     }
 
+    [Authorize(Roles = "Administrator")]
     [HttpGet("users")]
     public IActionResult GetAllUsers()
     {
