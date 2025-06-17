@@ -51,7 +51,7 @@ export default function ScheduleViewer({ schedules = [] }) {
     setSelectedAppointment(null);
   };
 
-  const timeSlots = generateTimeSlots("08:00", "18:00");
+  const timeSlots = generateTimeSlots("08:00", "23:30");
 
   const getAppointment = (day, time) => {
     if (!Array.isArray(schedules)) return null;

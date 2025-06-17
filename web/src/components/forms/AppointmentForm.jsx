@@ -94,7 +94,7 @@ export default function AppointmentForm({
       onSaved();
     } catch (error) {
       console.error("Error al guardar la cita:", error);
-      alert("Hubo un error al guardar la cita.");
+      alert("Hubo un error al guardar la cita, revise que se creó dentro del horario del doctor.");
     } finally {
       setLoading(false);
     }

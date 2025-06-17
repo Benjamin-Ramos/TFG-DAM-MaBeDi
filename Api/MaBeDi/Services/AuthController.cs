@@ -118,24 +118,24 @@ public class AuthController : ControllerBase
         return Ok("Patient registered");
     }
 
-    //[HttpPost("register/admin")]
-    //public async Task<IActionResult> RegisterAdmin(RegisterAdminRequest request)
-    //{
-    //    if (_context.Users.Any(u => u.Username == request.Username))
-    //        return BadRequest("Username already exists");
+    [HttpPost("register/admin")]
+    public async Task<IActionResult> RegisterAdmin(RegisterAdminRequest request)
+    {
+        if (_context.Users.Any(u => u.Username == request.Username))
+            return BadRequest("Username already exists");
 
-    //    var user = new User
-    //    {
-    //        Username = request.Username,
-    //        PasswordHash = _passwordHasher.HashPassword(null!, request.Password),
-    //        Role = UserRole.Administrator
-    //    };
+        var user = new User
+        {
+            Username = request.Username,
+            PasswordHash = _passwordHasher.HashPassword(null!, request.Password),
+            Role = UserRole.Administrator
+        };
 
-    //    _context.Users.Add(user);
-    //    await _context.SaveChangesAsync();
+        _context.Users.Add(user);
+        await _context.SaveChangesAsync();
 
-    //    return Ok("Administrator registered");
-    //}
+        return Ok("Administrator registered");
+    }
 
     [HttpPost("login")]
     public IActionResult Login([FromBody] LoginRequest request)
