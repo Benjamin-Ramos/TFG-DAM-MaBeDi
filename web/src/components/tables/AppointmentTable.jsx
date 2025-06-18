@@ -61,10 +61,9 @@ export default function AppointmentTable({
     const [date, time] = dateTime.split("T");
     
     if (logoBase64) {
-      doc.addImage(logoBase64, "PNG", 15, 10, 25, 25);
+      doc.addImage(logoBase64, "PNG", 15, 10, 55, 25);
     }
-    doc.setFontSize(16).setFont("helvetica", "bold").text("Centro Médico MABEDI", 105, 20, { align: "center" });
-    doc.setFontSize(10).text("Informe de cita médica", 105, 26, { align: "center" });
+    doc.setFontSize(16).setFont("helvetica", "bold").text("Informe de cita médica", 105, 20, { align: "center" });
     doc.setLineWidth(0.5).line(20, 30, 190, 30);
     
     const fields = [];
@@ -92,9 +91,6 @@ export default function AppointmentTable({
       y += spacing;
     });
 
-    doc.setFontSize(9).setTextColor(120)
-      .text("Documento confidencial generado por MABEDI.", 105, doc.internal.pageSize.height - 20, { align: "center" });
-    
     doc.save(`Cita_${appt.id}.pdf`);
   };
 
