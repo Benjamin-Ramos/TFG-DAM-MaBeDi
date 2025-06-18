@@ -21,7 +21,7 @@ Este proyecto tiene como objetivo el desarrollo de una **solución multiplatafor
 | Backend/API      | ASP.NET Core, Entity Framework Core, SQL Server   |
 | App Móvil        | Kotlin                                            |
 | Portal Web       | React.js, TypeScript                              |
-| Infraestructura  | Azure (opcional para despliegue en la nube)       |
+| Infraestructura  | Vercel/Render (opcional para despliegue)          |
 
 ## 👥 Usuarios y Funcionalidades
 
